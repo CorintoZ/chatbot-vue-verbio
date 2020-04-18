@@ -18,8 +18,7 @@ export default new Vuex.Store({
       user: '',
       password: ''
     },
-    messages: [],
-    isBotWriting: true
+    messages: []
   },
   mutations: {
     SET_USER(state, user) {
@@ -27,9 +26,6 @@ export default new Vuex.Store({
     },
     ADD_MESSAGE(state, message) {
       state.messages = state.messages.concat(message)
-    },
-    IS_BOT_WRITING(state, val) {
-      state.isBotWriting = val
     }
   },
   actions: {
@@ -89,9 +85,6 @@ export default new Vuex.Store({
     },
     getMessages: state => {
       return state.messages
-    },
-    isBotWriting: state => {
-      return state.isBotWriting
     }
   }
 })

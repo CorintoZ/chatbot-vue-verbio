@@ -1,53 +1,26 @@
 <template>
   <div id="login">
     <form @submit.prevent="submit">
-      <h2>Login</h2>
-      <div class="form-group">
-        <label for="username">Username</label>
+      <h1>Login</h1>
+      <div>
         <input
           type="text"
-          v-model="username"
-          name="username"
-          class="form-control"
-          :class="{ 'is-invalid': submitted && !username }"
+          name="user"
+          v-model="input.user"
+          placeholder="Username"
         />
-        <div v-show="submitted && !username" class="invalid-feedback">
-          Username is required
-        </div>
       </div>
-      <div class="form-group">
-        <label htmlFor="password">Password</label>
+      <div>
         <input
           type="password"
-          v-model="password"
           name="password"
-          class="form-control"
-          :class="{ 'is-invalid': submitted && !password }"
+          v-model="input.password"
+          placeholder="Password"
         />
-        <div v-show="submitted && !password" class="invalid-feedback">
-          Password is required
-        </div>
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary">
-          Login
-        </button>
+      <div>
+        <input id="sumbit" type="submit" value="Login" />
       </div>
-
-      <h1>Login</h1>
-      <input
-        type="text"
-        name="user"
-        v-model="input.user"
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        name="password"
-        v-model="input.password"
-        placeholder="Password"
-      />
-      <input type="submit" value="Login" />
     </form>
   </div>
 </template>
@@ -69,9 +42,13 @@ export default {
         return
       }
       this.$store.dispatch('loginUser', this.input)
+      this.input = {
+        user: '',
+        password: ''
+      }
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
