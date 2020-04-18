@@ -1,19 +1,54 @@
 <template>
   <div id="login">
-    <h1>Login</h1>
-    <input
-      type="text"
-      name="username"
-      v-model="input.username"
-      placeholder="Username"
-    />
-    <input
-      type="password"
-      name="password"
-      v-model="input.password"
-      placeholder="Password"
-    />
-    <button type="button" :click="login()">Login</button>
+    <form @submit.prevent="submit">
+      <h2>Login</h2>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          v-model="username"
+          name="username"
+          class="form-control"
+          :class="{ 'is-invalid': submitted && !username }"
+        />
+        <div v-show="submitted && !username" class="invalid-feedback">
+          Username is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          v-model="password"
+          name="password"
+          class="form-control"
+          :class="{ 'is-invalid': submitted && !password }"
+        />
+        <div v-show="submitted && !password" class="invalid-feedback">
+          Password is required
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary">
+          Login
+        </button>
+      </div>
+
+      <h1>Login</h1>
+      <input
+        type="text"
+        name="user"
+        v-model="input.user"
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        name="password"
+        v-model="input.password"
+        placeholder="Password"
+      />
+      <input type="submit" value="Login" />
+    </form>
   </div>
 </template>
 
@@ -22,13 +57,19 @@ export default {
   data() {
     return {
       input: {
-        username: '',
+        user: '',
         password: ''
       }
     }
   },
   methods: {
-    login() {}
+    submit() {
+      if (!this.input.user || !this.input.password) {
+        console.log('Provide an user and password')
+        return
+      }
+      this.$store.dispatch('loginUser', this.input)
+    }
   }
 }
 </script>
